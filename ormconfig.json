@@ -8,7 +8,7 @@
   "port": 5432,
   "database": "fin_api",
   "entities": [
-    "./src/modules/**/entities/*.ts"
+    "**/entities/*.ts"
   ],
   "migrations": [
     "./src/database/migrations/*.ts"

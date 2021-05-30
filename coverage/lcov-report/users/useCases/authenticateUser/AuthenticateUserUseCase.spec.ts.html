@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for statements/repositories/in-memory/InMemoryStatementsRepository.ts</title>
+    <title>Code coverage report for users/useCases/authenticateUser/AuthenticateUserUseCase.spec.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">statements/repositories/in-memory</a> InMemoryStatementsRepository.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">users/useCases/authenticateUser</a> AuthenticateUserUseCase.spec.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/51</span>
+                <span class='fraction'>0/58</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/51</span>
+                <span class='fraction'>0/58</span>
             </div>
         
             
@@ -108,7 +108,13 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -159,58 +165,70 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { Statement } from "../../entities/Statement";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { ICreateStatementDTO } from "../../useCases/createStatement/ICreateStatementDTO";</span>
-<span class="cstat-no" title="statement not covered" >import { IGetBalanceDTO } from "../../useCases/getBalance/IGetBalanceDTO";</span>
-<span class="cstat-no" title="statement not covered" >import { IGetStatementOperationDTO } from "../../useCases/getStatementOperation/IGetStatementOperationDTO";</span>
-<span class="cstat-no" title="statement not covered" >import { IStatementsRepository } from "../IStatementsRepository";</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import faker from 'faker'</span></span></span>
+<span class="cstat-no" title="statement not covered" >import { InMemoryUsersRepository } from '../../repositories/in-memory/InMemoryUsersRepository'</span>
+<span class="cstat-no" title="statement not covered" >import { CreateUserUseCase } from '../createUser/CreateUserUseCase'</span>
+<span class="cstat-no" title="statement not covered" >import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'</span>
+<span class="cstat-no" title="statement not covered" >import { IncorrectEmailOrPasswordError } from './IncorrectEmailOrPasswordError'</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export class InMemoryStatementsRepository implements IStatementsRepository {</span>
-<span class="cstat-no" title="statement not covered" >  private statements: Statement[] = [];</span>
+<span class="cstat-no" title="statement not covered" >let usersRepository: InMemoryUsersRepository</span>
+<span class="cstat-no" title="statement not covered" >let createUserUseCase: CreateUserUseCase</span>
+<span class="cstat-no" title="statement not covered" >let authenticateUserUseCase:  AuthenticateUserUseCase</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  async create(data: ICreateStatementDTO): Promise&lt;Statement&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const statement = new Statement();</span>
+<span class="cstat-no" title="statement not covered" >describe("Autenticate user", ()=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >    beforeEach(()=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >        usersRepository = new InMemoryUsersRepository()</span>
+<span class="cstat-no" title="statement not covered" >        createUserUseCase = new CreateUserUseCase(usersRepository)</span>
+<span class="cstat-no" title="statement not covered" >        authenticateUserUseCase = new AuthenticateUserUseCase(usersRepository)</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    it("Should be able to authenticate an user", async()=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >        const user = {</span>
+<span class="cstat-no" title="statement not covered" >            name: faker.name.findName(),</span>
+<span class="cstat-no" title="statement not covered" >            email: faker.internet.email(),</span>
+<span class="cstat-no" title="statement not covered" >            password: faker.internet.password()</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    Object.assign(statement, data);</span>
+<span class="cstat-no" title="statement not covered" >        await createUserUseCase.execute(user)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    this.statements.push(statement);</span>
+<span class="cstat-no" title="statement not covered" >        const authenticatedUser = await authenticateUserUseCase.execute({</span>
+<span class="cstat-no" title="statement not covered" >            email: user.email,</span>
+<span class="cstat-no" title="statement not covered" >            password: user.password</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return statement;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  async findStatementOperation({ statement_id, user_id }: IGetStatementOperationDTO): Promise&lt;Statement | undefined&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return this.statements.find(operation =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >      operation.id === statement_id &amp;&amp;</span>
-<span class="cstat-no" title="statement not covered" >      operation.user_id === user_id</span>
-<span class="cstat-no" title="statement not covered" >    ));</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  async getUserBalance({ user_id, with_statement = false }: IGetBalanceDTO):</span>
-<span class="cstat-no" title="statement not covered" >    Promise&lt;</span>
-<span class="cstat-no" title="statement not covered" >      { balance: number } | { balance: number, statement: Statement[] }</span>
-<span class="cstat-no" title="statement not covered" >    &gt;</span>
-<span class="cstat-no" title="statement not covered" >  {</span>
-<span class="cstat-no" title="statement not covered" >    const statement = this.statements.filter(operation =&gt; operation.user_id === user_id);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const balance = statement.reduce((acc, operation) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      if (operation.type === 'deposit') {</span>
-<span class="cstat-no" title="statement not covered" >        return acc + operation.amount;</span>
-<span class="cstat-no" title="statement not covered" >      } else {</span>
-<span class="cstat-no" title="statement not covered" >        return acc - operation.amount;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }, 0)</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if (with_statement) {</span>
-<span class="cstat-no" title="statement not covered" >      return {</span>
-<span class="cstat-no" title="statement not covered" >        statement,</span>
-<span class="cstat-no" title="statement not covered" >        balance</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return { balance }</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >        expect(authenticatedUser).toHaveProperty("token")</span>
+<span class="cstat-no" title="statement not covered" >        expect(authenticatedUser).toMatchObject({</span>
+<span class="cstat-no" title="statement not covered" >            user:{</span>
+<span class="cstat-no" title="statement not covered" >                name: user.name,</span>
+<span class="cstat-no" title="statement not covered" >                email: user.email</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    it("Should not be able to authenticate with an unexistent user", async ()=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >        const user = {</span>
+<span class="cstat-no" title="statement not covered" >            email: faker.internet.email(),</span>
+<span class="cstat-no" title="statement not covered" >            password: faker.internet.password()</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        await expect(authenticateUserUseCase.execute(user)).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError)</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    it("Should not be able to authenticate using wrong password", async ()=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >        const user = {</span>
+<span class="cstat-no" title="statement not covered" >            name: faker.name.findName(),</span>
+<span class="cstat-no" title="statement not covered" >            email: faker.internet.email(),</span>
+<span class="cstat-no" title="statement not covered" >            password: faker.internet.password()</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >        await createUserUseCase.execute(user)</span>
+<span class="cstat-no" title="statement not covered" >        await expect(authenticateUserUseCase.execute({</span>
+<span class="cstat-no" title="statement not covered" >            email: user.email,</span>
+<span class="cstat-no" title="statement not covered" >            password: "wrongpassword"</span>
+<span class="cstat-no" title="statement not covered" >        })).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError)</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >})</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
