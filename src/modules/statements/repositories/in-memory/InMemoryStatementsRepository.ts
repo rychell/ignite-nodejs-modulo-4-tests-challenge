@@ -10,7 +10,11 @@ export class InMemoryStatementsRepository implements IStatementsRepository {
   async create(data: ICreateStatementDTO): Promise<Statement> {
     const statement = new Statement();
 
-    Object.assign(statement, data);
+    Object.assign(statement, {
+      ...data,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
 
     this.statements.push(statement);
 

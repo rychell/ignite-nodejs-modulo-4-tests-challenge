@@ -3,7 +3,7 @@ import { container } from "tsyringe";
 import { TransferUseCase } from "./TransferUseCase";
 
 class TransferController {
-    async handle(request: Request, response: Response): Promise<Response>{
+    async execute(request: Request, response: Response): Promise<Response>{
         const transferUseCase = container.resolve(TransferUseCase)
         const { id: sender_id} = request.user
         const {user_id: receiver_id} = request.params
